@@ -1,0 +1,20 @@
+//variables
+@main-color: #000000;
+@main-font: "arial,helvetica,sans-serif";
+@primary: gray;
+@light-primary: lighten(@primary,20%);
+
+//functions
+.reset(){
+  margin: 0;
+  padding: 0;
+}
+
+.flex(){
+  display: flex;
+}
+
+body{
+  .reset;
+  background-color: @light-primary;
+}

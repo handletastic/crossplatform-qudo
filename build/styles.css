@@ -4,3 +4,6 @@ body {
   background-color: #b3b3b3;
   color: #000000;
 }
+.urgent {
+  color: red;
+}

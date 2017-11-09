@@ -1,15 +1,6 @@
 doctype html
+
 html
-  include ./head.pug
-  
-  body
-    header.header
-      h1 To do list
-    ul#task-list
-      li Buy bread
-      li.urgent Pay bill
-      li Wash dishes
-    footer
-      form#task-form
-        input#task-input
-        button(type='submit')
+  include ./header.pug
+  include ./body.pug
+  include ./footer.pug

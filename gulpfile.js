@@ -8,7 +8,7 @@ var prettify = require('gulp-prettify');
 var browsersync = require('browser-sync');
 var runsequence = require('run-sequence');
 
-//functions
+/* #### less to css #### */
 gulp.task('less', function(){
   return gulp.src('less/*.less')
   .pipe(less())
@@ -17,6 +17,7 @@ gulp.task('less', function(){
   .pipe(browsersync.reload({stream: true}))
 });
 
+/* #### pug to html #### */
 gulp.task('pug', function(){
   return gulp.src('templates/*.pug')
   .pipe(pug())
@@ -25,11 +26,13 @@ gulp.task('pug', function(){
   .pipe(browsersync.reload({stream:true}))
 });
 
+/* #### refresh browser #### */
 gulp.task('browsersync', function(){
   browsersync.init({server: {baseDir: 'build'}
   });
 });
 
+/* #### watch folder/file changes #### */
 gulp.task('watch', function(){
   runsequence('pug', 'less', 'browsersync', function(){});
   gulp.watch('less/*.less',['less']);

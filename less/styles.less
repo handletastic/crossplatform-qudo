@@ -2,13 +2,17 @@
 @main-color: #000000;
 @main-font: "arial,helvetica,sans-serif";
 @primary: gray;
-@light-primary: lighten(@primary,20%);
-@urgent-color: lighten(red, 30%);
+@light-primary: lighten(@primary,80%);
+@urgent-color: lighten(red, 10%);
 
 //functions
 .reset(){
   margin: 0;
   padding: 0;
+}
+
+.primary-font(){
+  font-family: helvetica;
 }
 
 .flex(){
@@ -17,10 +21,12 @@
 
 body{
   .reset;
+  .primary-font;
   background-color: @light-primary;
   color: @main-color;
 }
 
 .urgent{
   color: @urgent-color;
+  font-weight: bold;
 }

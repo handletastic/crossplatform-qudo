@@ -1,50 +1,51 @@
-//variables
 var gulp = require('gulp');
-var less = require('gulp-less');
-var minify = require('gulp-minify');
-var watch = require('gulp-watch');
+var sass = require('gulp-sass');
 var pug = require('gulp-pug');
-var prettify = require('gulp-prettify');
-var browsersync = require('browser-sync');
+var plumber = require('gulp-plumber');
+var minify = require('gulp-minify');
+var cleancss = require('gulp-clean-css');
+var watch = require('gulp-watch');
 var runsequence = require('run-sequence');
+var browserSync = require('browser-sync')
+var prettify = require('gulp-prettify');
+var concat = require('gulp-concat');
 
 var buildpath = 'build';
 
-/* #### less to css #### */
-gulp.task('less', function(){
-  return gulp.src('less/*.less')
-  .pipe(less())
-  .pipe(minify())
-  .pipe(gulp.dest(buildpath+'/css'))
-  .pipe(browsersync.reload({stream: true}))
-});
-
-/* #### pug to html #### */
-gulp.task('pug', function(){
+gulp.task('html',function(){
   return gulp.src('templates/*.pug')
   .pipe(pug())
   .pipe(prettify())
-  .pipe(gulp.dest(buildpath))
-  .pipe(browsersync.reload({stream:true}))
+  .pipe(browserSync.reload({stream:true}))
+  .pipe(gulp.dest(buildpath));
 });
 
-/* #### pug to html #### */
+gulp.task('sass', function(){
+  return gulp.src('scss/*.scss')
+  .pipe(plumber())
+  .pipe(sass())
+  .pipe(cleancss())
+  .pipe(browserSync.reload({stream:true}))
+  .pipe(gulp.dest(buildpath+'/css'));
+});
+
 gulp.task('js', function(){
   return gulp.src('js/*.js')
   .pipe(concat('main.js'))
-  .pipe(browsersync.reload({stream:true}))
-  .pipe(gulp.dest(buildpath+'/js'))
+  .pipe(browserSync.reload({stream:true}))
+  .pipe(gulp.dest(buildpath+'/js'));
 });
 
-/* #### refresh browser #### */
-gulp.task('browsersync', function(){
-  browsersync.init({server: {baseDir: 'build'}
-  });
+gulp.task('browserSync', function() {
+  browserSync.init({
+    server: {baseDir: 'build'},
+    port: '8082'
+  })
 });
 
-/* #### watch folder/file changes #### */
 gulp.task('watch', function(){
-  runsequence('pug', 'less', 'browsersync', function(){});
-  gulp.watch('less/*.less',['less']);
-  gulp.watch('templates/*.pug', ['pug']);
+  runsequence('sass','html','js','browserSync');
+  gulp.watch('scss/*.scss', ['sass']);
+  gulp.watch('templates/*.pug', ['html']);
+  gulp.watch('js/*.js', ['js']);
 });

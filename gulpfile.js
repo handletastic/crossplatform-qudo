@@ -8,12 +8,14 @@ var prettify = require('gulp-prettify');
 var browsersync = require('browser-sync');
 var runsequence = require('run-sequence');
 
+var buildpath = 'build';
+
 /* #### less to css #### */
 gulp.task('less', function(){
   return gulp.src('less/*.less')
   .pipe(less())
   .pipe(minify())
-  .pipe(gulp.dest('build'))
+  .pipe(gulp.dest(buildpath+'/css'))
   .pipe(browsersync.reload({stream: true}))
 });
 
@@ -22,8 +24,16 @@ gulp.task('pug', function(){
   return gulp.src('templates/*.pug')
   .pipe(pug())
   .pipe(prettify())
-  .pipe(gulp.dest('build'))
+  .pipe(gulp.dest(buildpath))
   .pipe(browsersync.reload({stream:true}))
+});
+
+/* #### pug to html #### */
+gulp.task('js', function(){
+  return gulp.src('js/*.js')
+  .pipe(concat('main.js'))
+  .pipe(browsersync.reload({stream:true}))
+  .pipe(gulp.dest(buildpath+'/js'))
 });
 
 /* #### refresh browser #### */

@@ -15,6 +15,7 @@ var template = ( function(){
     template_html.setAttribute('data-id',taskobj.id);
     template_html.setAttribute('data-status',taskobj.status);
     template_html.setAttribute('data-name',taskobj.name);
+
     template_html.querySelector('.task-text').innerText = taskobj.name;
     template_html.querySelector('button[data-function="delete"]').setAttribute('data-id',taskobj.id);
     template_html.querySelector('button[data-function="status"]').setAttribute('data-id',taskobj.id);

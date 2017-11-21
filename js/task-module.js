@@ -1,22 +1,34 @@
-var task = (function(){
-  var task = {};
-  task.TaskArray = [];
-
-  task.add = function(taskname){
-    //create a new task object and add to array
-    let taskobj = new Task(taskname);
-    task.TaskArray.push(taskobj);
+var task = ( function(){
+  var object = {};
+  object.taskArray = [];
+  
+  object.add = function(taskname){
+    let taskitem = new Task(taskname);
+    object.taskArray.push(taskitem);
   }
-
-  task.remove = function(id){
-    //loop through task array and splice (remove) task with the id
-    let count = TaskArray.length;
-    for(let i=0; i < count; i++){
-      let item = TaskArray[i];
-      if(item.id == id){
-        task.TaskArray.splice(i,1);
+  
+  object.changeStatus = function(id,status){
+    let taskcount = object.taskArray.length;
+    for(let i=0; i<taskcount; i++){
+      let item = object.taskArray[i];
+      if( item.id == id ){
+        item.status = status;
+        break;
+        return true;
       }
     }
   }
-  return task;
-}());
+  object.delete = function(id){
+    let taskcount = object.taskArray.length;
+    for(let i=0; i<taskcount; i++){
+      let item = object.taskArray[i];
+      if( item.id == id ){
+        object.taskArray.splice(i,1);
+        break;
+        return true;
+      }
+    }
+  }
+  return object;
+}
+());

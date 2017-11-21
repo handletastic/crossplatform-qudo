@@ -5,14 +5,17 @@ var app = (function(){
     let newtask = formmodule.getValue();
     if(newtask){
       task.add(newtask);
-      storage.store(task.TaskArray);
+      storage.store(task.taskArray);
       uimodule.render();
     }
-    
     form.reset();
   });
-  window.addEventListener('load',(event)=>{
-    task.TaskArray = storage.read();
+  uimodule.bindListener();
+  window.addEventListener('load',() => {
+    //check if read returns valid data eg if storage is not empty
+    if(storage.read()){
+      task.taskArray = storage.read() ;
+    }
     uimodule.render();
   });
 }());

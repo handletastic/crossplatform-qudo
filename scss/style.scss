@@ -79,7 +79,7 @@ header{
     height:48px;
     background-size: 80%;
     @include button-svg;
-    background-image:url('/images/fa-bars.svg');
+    background-image:url('../images/fa-bars.svg');
   }
   .settings-button:focus{
     outline:none;
@@ -95,7 +95,7 @@ header{
     height:48px;
     background-size: 80%;
     @include button-svg;
-    background-image:url('/images/fa-user.svg');
+    background-image:url('../images/fa-user.svg');
   }
 }
 
@@ -196,7 +196,7 @@ footer{
       font-size: $input-font-size * 0.75;
       background-size: 75%;
       @include button-svg;
-      background-image:url('/images/fa-plus.svg');
+      background-image:url('../images/fa-plus.svg');
     }
   }
 }

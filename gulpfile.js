@@ -75,4 +75,5 @@ gulp.task('watch', function(){
   gulp.watch('scss/*.scss', ['sass']);
   gulp.watch('templates/*.pug', ['pug']);
   gulp.watch('js/*.js', ['js']);
+  gulp.watch('images/*.*', ['images']);
 });

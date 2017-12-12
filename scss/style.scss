@@ -184,7 +184,8 @@ footer{
       padding:9px;
       font-size: $input-font-size;
       color: $input-color;
-      border:2px solid $secondary-color;
+      border: solid $secondary-color;
+      border-width: 2px 0px 2px 2px;
       flex:1;
     }
     #task-input:focus{

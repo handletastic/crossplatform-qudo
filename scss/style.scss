@@ -1,11 +1,14 @@
-$primary-color: hsl(200, 80%, 50%);
-$secondary-color: darken($primary-color, 10%);
-$main-font: helvetica,arial,sans-serif;
-$main-font-size:16px;
-$header-font-size:26px;
+//doc settings
 $full-height: 100vh;
 
-//fonts
+//color set
+$primary-color: hsl(200, 80%, 50%);
+$secondary-color: darken($primary-color, 10%);
+
+//font set
+$main-font: Cabin,helvetica,arial,sans-serif;
+$main-font-size:16px;
+$header-font-size:26px;
 $title-font: Lobster;
 
 //header
@@ -24,7 +27,7 @@ $content-height: calc($fullheight - #{$header-height});
 $footer-height: $header-height;
 $footer-bg: $secondary-color;
 
-$input-color:darken($primary-color,50%);
+$input-color: darken($secondary-color,10%);
 $input-font-size: 20px;
 
 @mixin flex(){
@@ -145,7 +148,8 @@ main{
     .task-row{
       display:flex;
       justify-content:space-between;
-      .task-text{
+      .task-text {
+        color: $input-color;
         word-wrap:break-word;
         max-width:70vw;
       }
@@ -182,6 +186,7 @@ footer{
     width: 100vw;
     #task-input{
       padding:9px;
+      font-family: $main-font;
       font-size: $input-font-size;
       color: $input-color;
       border: solid $secondary-color;

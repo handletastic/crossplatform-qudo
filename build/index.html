@@ -4,18 +4,32 @@
     <title>To do List</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
   </head>
   <body>
     <header class="header">
-      <h1>To do List</h1>
+      <button class="settings-button" data-function="settings" id="settings-button"></button>
+      <h1>Qudo</h1>
+      <button class="avatar-button" id="avatar-button"></button>
     </header>
     <main>
+      <div class="settings-panel">
+        <form id="settings">
+          <h3>Sort tasks by</h3>
+          <div class="group row">
+            <input id="sort-status" type="radio" name="sort" value="status" checked>
+            <label for="sort-status">Status</label>
+            <input id="sort-date" type="radio" name="sort" value="date">
+            <label for="sort-date">Date Added</label>
+          </div>
+        </form>
+      </div>
       <ul id="task-list"></ul>
     </main>
     <footer>
       <form class="row" id="task-form">
         <input id="task-input" type="text" placeholder="add task">
-        <button type="submit" id="task-button">Add</button>
+        <button type="submit" id="task-button"></button>
       </form>
     </footer>
     <script src="js/main.js"></script>

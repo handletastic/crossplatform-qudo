@@ -137,7 +137,7 @@ main{
     color:darken($primary-color,40%);
   }
   li[data-status="1"]{
-    background-color:lighten($primary-color,20%);
+    background-color:lighten($primary-color,35%);
     text-decoration:line-through;
     color:darken($primary-color,40%);
     button[data-function="status"]{

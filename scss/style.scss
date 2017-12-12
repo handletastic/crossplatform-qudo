@@ -134,11 +134,11 @@ main{
     color:darken($primary-color,40%);
   }
   li[data-status="1"]{
-    background-color:lighten($primary-color,15%);
+    background-color:lighten($primary-color,20%);
     text-decoration:line-through;
     color:darken($primary-color,40%);
     button[data-function="status"]{
-      opacity:0.2;
+      opacity:0.5;
     }
   }
   li{
@@ -152,7 +152,7 @@ main{
       .buttons{
         width:100px;
         display:flex;
-        opacity:0.4;
+        opacity:0.7;
         button{
           width:50%;
           background-color:transparent;
@@ -162,10 +162,10 @@ main{
           background-position:center;
         }
         button[data-function="status"]{
-          background-image:url('../images/check.png');
+          background-image:url('../images/fa-check.svg');
         }
         button[data-function="delete"]{
-          background-image:url('../images/times.png');
+          background-image:url('../images/fa-times.svg');
         }
       }
     }

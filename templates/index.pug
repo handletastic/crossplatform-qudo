@@ -4,16 +4,29 @@ html
     title To do List
     meta(name='viewport',content='width=device-width,initial-scale=1.0')
     link(rel='stylesheet',href='css/style.css')
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Lobster")
+
   body
     header.header
-      h1 To do List
+      button(data-function='settings',class='settings-button',id='settings-button')
+      h1 Qudo
+      button(class='avatar-button', id='avatar-button')
     main
+      .settings-panel
+        form#settings
+          h3 Sort tasks by
+          .group.row
+            input(id='sort-status',type='radio',name='sort',value='status' checked) 
+            label(for='sort-status') Status
+            input(id='sort-date',type='radio',name='sort',value='date') 
+            label(for='sort-date') Date Added
       ul#task-list
     footer
       form#task-form.row
         input(id='task-input',type='text',placeholder='add task')
-        button(type='submit',id='task-button') Add
+        button(type='submit',id='task-button')
     script(src='js/main.js')
+    
     // template for task items with buttons
     template#task-template
       li(data-id='',data-name='',data-status='')
@@ -22,5 +35,3 @@ html
           .buttons
             button(class='task-action',data-function='status')
             button(class='task-action',data-function='delete')
-      
-    

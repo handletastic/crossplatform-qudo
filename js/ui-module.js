@@ -8,6 +8,7 @@ var uimodule = ( function(){
       let item = tasks[i];
       //create a template
       let listitem = template.create(item);
+
       listelem.appendChild(listitem);
     }
   }
@@ -17,7 +18,7 @@ var uimodule = ( function(){
       //itemid = event.target.getAttribute('data-id');
       if(event.target.getAttribute('data-function') == 'status'){
         itemid = event.target.getAttribute('data-id');
-        task.changeStatus(itemid,1);
+        task.changeStatus(itemid);
       }
       if(event.target.getAttribute('data-function') == 'delete'){
         itemid = event.target.getAttribute('data-id');

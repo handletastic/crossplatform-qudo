@@ -1,22 +1,28 @@
 var task = ( function(){
   var object = {};
   object.taskArray = [];
-  
+
   object.add = function(taskname){
     let taskitem = new Task(taskname);
     object.taskArray.push(taskitem);
+    object.sort();
   }
-  
-  object.changeStatus = function(id,status){
+
+  object.changeStatus = function(id){
     let taskcount = object.taskArray.length;
     for(let i=0; i<taskcount; i++){
       let item = object.taskArray[i];
       if( item.id == id ){
-        item.status = status;
+        if (item.status == 1) {
+          item.status = 0;
+        } else {
+          item.status = 1;
+        }
         break;
         return true;
       }
     }
+    object.sort();
   }
   object.delete = function(id){
     let taskcount = object.taskArray.length;
@@ -27,6 +33,19 @@ var task = ( function(){
         break;
         return true;
       }
+    }
+  }
+  object.sort = function(){
+    if(settings.sort = "status"){
+      //sort array according to its status
+      object.taskArray.sort(function(task1,task2){
+        return parseInt(task1.status) - parseInt(task2.status);
+      });
+    }
+    else if(settings.sort = "date"){
+      object.taskArray.sort(function(task1,task2){
+        return parseInt(task1.id) - parseInt(task2.id);
+      });
     }
   }
   return object;

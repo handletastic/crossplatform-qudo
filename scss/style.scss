@@ -1,25 +1,35 @@
-$main-color: hsl(54, 83%, 75%);
-$header-bg: darken($main-color, 10%);
-$main-font: arial,helvetica,sans-serif;
+$primary-color: hsl(200, 80%, 50%);
+$secondary-color: darken($primary-color, 10%);
+$main-font: helvetica,arial,sans-serif;
 $main-font-size:16px;
+$header-font-size:26px;
 $full-height: 100vh;
 
+//fonts
+$title-font: Lobster;
+
+//header
 $header-height: 50px;
 
-@mixin header-padding(){
-  padding:10px 10px;
-  @include box;
-}
 $content-height: calc($fullheight - #{$header-height});
 @mixin box(){
   box-sizing: border-box;
 }
 
-$footer-height: $header-height;
-$footer-bg: $header-bg;
+@mixin header-padding(){
+  padding:10px 10px;
+  @include box;
+}
 
-$input-color:darken($main-color,50%);
+$footer-height: $header-height;
+$footer-bg: $secondary-color;
+
+$input-color:darken($primary-color,50%);
 $input-font-size: 20px;
+
+@mixin flex(){
+  display: flex;
+}
 @mixin row(){
   display: flex;
   flex-direction: row;
@@ -32,6 +42,16 @@ $input-font-size: 20px;
 @mixin fullheight(){
   height: 100vh;
 }
+
+@mixin button-svg(){
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border:solid transparent;
+}
+
+
+
 html,body{
   @include fullheight;
 }
@@ -43,16 +63,65 @@ body{
 }
 header{
   height: $header-height;
-  background-color:$header-bg;
-  @include header-padding;
+  background-color:$secondary-color;
+  @include row;
   h1,h2,h3{
     @include reset;
+    font-size:$header-font-size;
+    color: white;
+    font-family: $title-font;
+    text-align: center;
+    width:calc(100vw - 48px);
+    @include header-padding;
+  }
+  .settings-button{
+    width:48px;
+    height:48px;
+    background-size: 80%;
+    @include button-svg;
+    background-image:url('/images/fa-bars.svg');
+  }
+  .settings-button:focus{
+    outline:none;
+  }
+  .settings-button.open{
+    background-color:darken($primary-color,30%);
+    .stripe{
+      background-color:darken($primary-color,50%);
+    }
+  }
+  .avatar-button{
+    width:48px;
+    height:48px;
+    background-size: 80%;
+    @include button-svg;
+    background-image:url('/images/fa-user.svg');
   }
 }
+
 main{
   height: calc(100vh - (#{$header-height} * 2));
   overflow-x:hidden;
   overflow-y:auto;
+  .settings-panel{
+    position:absolute;
+    left: -100vw;
+    transition:left 1s;
+    top:$header-height;
+    z-index:999;
+    background-color:white;
+    width:80vw;
+    box-shadow:5px 5px 8px rgba(0,0,0,0.5);
+    min-height:calc(100vh - (#{$header-height}));
+    #settings{
+      max-width:80%;
+      margin:0 auto;
+    }
+  }
+  .settings-panel.open{
+    top:$header-height;
+    left:0;
+  }
 }
 
 #task-list{
@@ -62,12 +131,15 @@ main{
     font-size:20px;
     padding-left:10px;
     border-bottom: 1px solid #ccc;
-    color:darken($main-color,40%);
+    color:darken($primary-color,40%);
   }
   li[data-status="1"]{
-    background-color:lighten($main-color,5%);
+    background-color:lighten($primary-color,15%);
     text-decoration:line-through;
-    color:darken($main-color,10%);
+    color:darken($primary-color,40%);
+    button[data-function="status"]{
+      opacity:0.2;
+    }
   }
   li{
     .task-row{
@@ -80,6 +152,7 @@ main{
       .buttons{
         width:100px;
         display:flex;
+        opacity:0.4;
         button{
           width:50%;
           background-color:transparent;
@@ -97,28 +170,33 @@ main{
       }
     }
   }
-    
+
 }
 
 footer{
+  @include flex
   height: $footer-height;
   background-color:$footer-bg;
   #task-form{
     @include row;
+    width: 100vw;
     #task-input{
-      padding:10px;
+      padding:9px;
       font-size: $input-font-size;
       color: $input-color;
-      border:1px solid $input-color;
+      border:2px solid $secondary-color;
       flex:1;
     }
     #task-input:focus{
       outline:none;
     }
     #task-button{
-      width: $header-height + 10;
+      width: $header-height;
       height:48px;
       font-size: $input-font-size * 0.75;
+      background-size: 75%;
+      @include button-svg;
+      background-image:url('/images/fa-plus.svg');
     }
   }
 }

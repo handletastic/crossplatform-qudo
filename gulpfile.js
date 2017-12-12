@@ -13,7 +13,8 @@ var concat = require('gulp-concat');
 var buildpath = 'build';
 var docspath = 'docs';
 
-gulp.task('html',function(){
+//compile pug to html and update html
+gulp.task('pug',function(){
   return gulp.src('templates/*.pug')
   .pipe(pug())
   .pipe(prettify())
@@ -21,6 +22,7 @@ gulp.task('html',function(){
   .pipe(gulp.dest(buildpath));
 });
 
+//compile sass to css and update css
 gulp.task('sass', function(){
   return gulp.src('scss/*.scss')
   .pipe(plumber())
@@ -31,6 +33,7 @@ gulp.task('sass', function(){
   .pipe(gulp.dest(docspath+'/css'));
 });
 
+//update javascript
 gulp.task('js', function(){
   return gulp.src([
     'js/classes.js',
@@ -39,6 +42,7 @@ gulp.task('js', function(){
     'js/storage-module.js',
     'js/template-module.js',
     'js/ui-module.js',
+    'js/settings-module.js',
     'js/main-module.js'
   ])
   .pipe(concat('main.js'))
@@ -46,6 +50,13 @@ gulp.task('js', function(){
   .pipe(gulp.dest(buildpath+'/js'));
 });
 
+//update images
+gulp.task('images' , function() {
+  return gulp.src('images/**')
+  .pipe(gulp.dest(buildpath+'/images'));
+});
+
+//start browsersync
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {baseDir: 'build'},
@@ -53,14 +64,16 @@ gulp.task('browserSync', function() {
   })
 });
 
-gulp.task('docs', function(){
+//update gitpages
+gulp.task('docs', function() {
   return gulp.src(buildpath + '/**')
   .pipe(gulp.dest(docspath));
 });
 
+//start watch
 gulp.task('watch', function(){
-  runsequence('sass','html','js','browserSync');
+  runsequence('sass','pug','js','images','browserSync');
   gulp.watch('scss/*.scss', ['sass']);
-  gulp.watch('templates/*.pug', ['html']);
+  gulp.watch('templates/*.pug', ['pug']);
   gulp.watch('js/*.js', ['js']);
 });

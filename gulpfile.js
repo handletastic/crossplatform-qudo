@@ -30,7 +30,6 @@ gulp.task('sass', function(){
   .pipe(cleancss())
   .pipe(browserSync.reload({stream:true}))
   .pipe(gulp.dest(buildpath+'/css'))
-  .pipe(gulp.dest(docspath+'/css'));
 });
 
 //update javascript
